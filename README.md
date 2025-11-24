@@ -1,7 +1,7 @@
 # mock-project_FleaMarket
 
 ## 環境構築
-- git@github.com:TakakazuSekiguchi/mock-project_FleaMarket.git
+- git clone git@github.com:TakakazuSekiguchi/mock-project_FleaMarket.git
 - docker-compose up -d --build
 
 ## Laravel環境構築
