@@ -1,0 +1,76 @@
+@extends('layouts.app')
+
+@section('link')
+@if(Auth::check())
+<!-- <input class="search-form__keyword-input" type="text" name="keyword" placeholder="何をお探しですか？" value="{{ request('keyword') }}"> -->
+<input class="search-form__keyword-input" type="text" placeholder="何をお探しですか？" >
+<form action="/logout" method="post">
+    @csrf
+    <button class="button__button">ログアウト</button>
+</form>
+<a class="button__mypage" href="/mypage">マイページ</a>
+<a class="button__putUp" href="/sell">出品</a>
+@endif
+@endsection
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/myProfile.css') }}">
+@endsection
+
+@section('content')
+<div class="myProfile__content">
+    <div class="myProfile__heading">
+        <h1 class="myProfile__title">プロフィール設定</h1>
+        <div class="user__group">
+            <p class="user__icon"></p> <!--アイコン_仮置き-->
+            <a class="button__image__select" href="">画像を選択する</a>
+        </div>
+    </div>
+    <form class="form" action="/?tab=mylist" method="post">
+        @csrf
+        <div class="form__group">
+            <div class="form__group-title">
+                <p class="form__label-item">ユーザー名</p>
+            </div>
+            <div class="form__group-content">
+                <div class="form__input">
+                    <input class="form__input-text" type="text" name="name" value="{{ old('name') }}">
+                </div>
+            </div>
+        </div>
+        <div class="form__group">
+            <div class="form__group-title">
+                <p class="form__label-item">郵便番号</p>
+            </div>
+            <div class="form__group-content">
+                <div class="form__input">
+                    <input class="form__input-text" type="text" name="postal_code" value="{{ old('postal_code') }}">
+                </div>
+            </div>
+        </div>
+        <div class="form__group">
+            <div class="form__group-title">
+                <p class="form__label-item">住所</p>
+            </div>
+            <div class="form__group-content">
+                <div class="form__input">
+                    <input class="form__input-text" type="text" name="address" value="{{ old('address') }}">
+                </div>
+            </div>
+        </div>
+        <div class="form__group">
+            <div class="form__group-title">
+                <p class="form__label-item">建物名</p>
+            </div>
+            <div class="form__group-content">
+                <div class="form__input">
+                    <input class="form__input-text" type="text" name="building" value="{{ old('building') }}">
+                </div>
+            </div>
+        </div>
+        <div class="form__button">
+            <button class="form__button-submit" type="submit">更新する</button>
+        </div>
+    </form>
+</div>
+@endsection
