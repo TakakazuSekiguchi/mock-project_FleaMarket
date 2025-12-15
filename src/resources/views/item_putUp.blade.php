@@ -1,18 +1,5 @@
 @extends('layouts.app')
 
-@section('link')
-@if(Auth::check())
-<!-- <input class="search-form__keyword-input" type="text" name="keyword" placeholder="何をお探しですか？" value="{{ request('keyword') }}"> -->
-<input class="search-form__keyword-input" type="text" placeholder="何をお探しですか？" >
-<form action="/logout" method="post">
-    @csrf
-    <button class="button__button">ログアウト</button>
-</form>
-<a class="button__mypage" href="/mypage">マイページ</a>
-<a class="button__putUp" href="/sell">出品</a>
-@endif
-@endsection
-
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/item_putUp.css') }}">
 @endsection
@@ -20,13 +7,14 @@
 @section('content')
 <div class="putUp__content">
     <div class="putUp__heading">
-        <h1>商品の出品</h1>
+        <h1 class="item-detail__title">商品の出品</h1>
         <p class="item-image">商品画像</p>
         <div class="item-image__select">
             <a class="button__image__select" href="">画像を選択する</a>
         </div>
     </div>
-    <form action="">
+    <form class="form__item" action="/sell" method="post">
+        @csrf
         <div class="item-detail">
             <div class="">
                 <h2 class="item-detail__title">商品の詳細</h2>
@@ -38,7 +26,8 @@
             </div>
             <div class="form__group-content">
                 <div class="form__category">
-                    <input type="checkbox" id="cat1" name="categories[]" value="1">
+                    <input type="radio" name="category_id" value="2">家電</input>
+                    <!-- <input type="checkbox" id="cat1" name="categories[]" value="1">
                     <label class="button__category" for="cat1">ファッション</label>
                     <input type="checkbox" id="cat2" name="categories[]" value="2">
                     <label class="button__category" for="cat2">家電</label>
@@ -65,7 +54,7 @@
                     <input type="checkbox" id="cat13" name="categories[]" value="13">
                     <label class="button__category" for="cat13">おもちゃ</label>
                     <input type="checkbox" id="cat14" name="categories[]" value="14">
-                    <label class="button__category" for="cat14">ベビー・キッズ</label>
+                    <label class="button__category" for="cat14">ベビー・キッズ</label> -->
                 </div>
             </div>
         </div>
@@ -77,10 +66,10 @@
                 <div class="form__input">
                     <select name="condition">
                         <option>選択してください</option>
-                        <option>良好</option>
-                        <option>目立った傷や汚れなし</option>
-                        <option>やや傷や汚れあり</option>
-                        <option>状態が悪い</option>
+                        <option value=1>良好</option>
+                        <option value=2>目立った傷や汚れなし</option>
+                        <option value=3>やや傷や汚れあり</option>
+                        <option value=4>状態が悪い</option>
                     </select>
                 </div>
             </div>
@@ -116,7 +105,7 @@
             </div>
             <div class="form__group-content">
                 <div class="form__textarea">
-                    <textarea class="form__textarea-text" name="textarea"></textarea>
+                    <textarea class="form__textarea-text" name="description"></textarea>
                 </div>
             </div>
         </div>

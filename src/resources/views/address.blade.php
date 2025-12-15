@@ -1,18 +1,5 @@
 @extends('layouts.app')
 
-@section('link')
-@if(Auth::check())
-<!-- <input class="search-form__keyword-input" type="text" name="keyword" placeholder="何をお探しですか？" value="{{ request('keyword') }}"> -->
-<input class="search-form__keyword-input" type="text" placeholder="何をお探しですか？" >
-<form action="/logout" method="post">
-    @csrf
-    <button class="button__button">ログアウト</button>
-</form>
-<a class="button__mypage" href="/mypage">マイページ</a>
-<a class="button__putUp" href="/sell">出品</a>
-@endif
-@endsection
-
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/address.css') }}">
 @endsection

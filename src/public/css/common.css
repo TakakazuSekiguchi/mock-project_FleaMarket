@@ -6,8 +6,57 @@
     margin: 0 auto;
     padding: 15px 10px;
     max-width: 1230px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .header__img {
     width: 250px;
+}
+
+.form__search {
+    display: inline-block;
+}
+
+.search-form__keyword-input {
+    width: 500px;
+    padding: 5px;
+}
+
+.form__logout {
+    display: inline-block;
+}
+
+.button__login {
+    text-decoration: none;
+    color: #fff;
+    margin: 0px 10px;
+}
+
+.button__logout {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    font-size: 16px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.button__mypage {
+    text-decoration: none;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.button__putUp {
+    border: #ddd;
+    background-color: #fff;
+    width: 100px;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #000;
+    border-radius: 3px;
 }

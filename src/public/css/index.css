@@ -1,0 +1,62 @@
+.tab-switch {
+    display: flex;
+    flex-wrap: wrap;
+    margin-inline: auto;
+    gap: 0 5px;
+}
+
+/* ラジオボタン非表示 */
+.tab-switch input {
+    display: none;
+}
+
+.tab-boder {
+    width: 15%;
+}
+
+/* タブボタン */
+.tab-switch label {
+    padding: 0.7em 1em;
+    cursor: pointer;
+    order: -1;
+    text-align: center;
+}
+
+/* コンテンツ非表示 */
+.tab-content {
+    display: none;
+    width: 100%;
+    padding: 1.5em 0;
+    border-top: 2px solid #ddd;
+    /* background-color: yellow; */
+}
+
+/* 選択されたタブ＋コンテンツを表示 */
+.tab-switch input:checked+label {
+    color: red;
+}
+
+.tab-switch input:checked+label+.tab-content {
+    display: block;
+}
+
+/* 商品関連の表示 */
+.content__flex {
+    display: flex;
+    flex-wrap: wrap;
+    /* flex-direction: row; */
+}
+
+.item__box {
+    display: block;
+    margin: 10px;
+    margin-left: 30px;
+    width: 200px;
+    height: 200px;
+    background-color: #ddd;
+    text-align: center;
+}
+
+.item__name {
+    margin-left: 30px;
+}

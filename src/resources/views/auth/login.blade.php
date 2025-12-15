@@ -19,6 +19,11 @@
                 <div class="form__input">
                     <input class="form__input-text" type="email" name="email" value="{{ old('email') }}">
                 </div>
+                <div class="form__error">
+                    @error('email')
+                    {{ $message }}
+                    @enderror
+                </div>
             </div>
         </div>
         <div class="form__group">
@@ -28,6 +33,11 @@
             <div class="form__group-content">
                 <div class="form__input">
                     <input class="form__input-text" type="password" name="password" >
+                </div>
+                <div class="form__error">
+                    @error('password')
+                    {{ $message }}
+                    @enderror
                 </div>
             </div>
         </div>

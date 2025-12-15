@@ -10,10 +10,37 @@
 </head>
 
 <body>
+    @php
+        $hidePages = ['login', 'register'];
+    @endphp
     <header class="header">
         <div class="header__inner">
             <img class="header__img" src="{{ asset('images/logo.png') }}" alt="logo" >
-            @yield('link')
+            @if (!Route::is($hidePages))
+                @guest
+                    <form class="form__search" action="{{ route('search') }}" method="get">
+                        <input class="search-form__keyword-input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
+                    </form>
+                    <div class="header__nav">
+                        <a class="button__login" href="/login">ログイン</a>
+                        <a class="button__mypage" href="/mypage">マイページ</a>
+                        <a class="button__putUp" href="/sell">出品</a>
+                    </div>
+                @endguest
+                @auth
+                    <form class="form__search" action="{{ route('search') }}" method="get">
+                        <input class="search-form__keyword-input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
+                    </form>
+                    <div class="header__nav">
+                        <form class="form__logout" action="/logout" method="post">
+                            @csrf
+                            <button class="button__logout">ログアウト</button>
+                        </form>
+                        <a class="button__mypage" href="/mypage">マイページ</a>
+                        <a class="button__putUp" href="/sell">出品</a>
+                    </div>
+                @endauth
+            @endif
         </div>
     </header>
     <main>

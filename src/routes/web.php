@@ -13,24 +13,30 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\MailSendController;
 
 //商品一覧画面（トップ画面）
-Route::get('/', [ItemController::class, 'index']);
+Route::get('/', [ItemController::class, 'index'])->name('index');
+Route::get('/search', [ItemController::class, 'search'])->name('search');
 
 //商品一覧画面（トップ画面）_マイリスト
-Route::get('/?tab=mylist', [ItemController::class, 'mylist']);
+Route::get('/?tab=mylist', [ItemController::class, 'index']);
 
 //商品出品画面
-Route::get('/sell', [ItemPutUpController::class, 'putUp']);
+Route::get('/sell', [ItemPutUpController::class, 'index']);
+Route::post('/sell', [ItemPutUpController::class, 'store'])->name('items.store');
+
+// Route::middleware('auth')->group(function () {
+//     Route::post('/sell', [ItemPutUpController::class, 'store'])->name('items.store');
+// });
 
 //プロフィール画面・プロフィール編集画面（設定画面）
-Route::get('/mypage', [UserController::class, 'mypage']);
+Route::get('/mypage', [UserController::class, 'index']);
 Route::get('/mypage/profile', [UserController::class, 'edit']);
 
 //商品詳細画面
-Route::get('/item/{item_id}', [ItemDetailController::class, 'item']);
+Route::get('/item/{item_id}', [ItemDetailController::class, 'index']);
 
 //商品購入画面・送付先住所変更画面
-Route::get('/purchase/{item_id}', [OrderController::class, 'order']);
-Route::get('/purchase/address/{item_id}', [OrderController::class, 'address']);
+Route::get('/purchase/{item_id}', [OrderController::class, 'index']);
+Route::get('/purchase/address/{item_id}', [OrderController::class, 'edit']);
 
 //---------------------認証関連---------------------
 Route::get('/verify-email', [AuthController::class, 'show']);
