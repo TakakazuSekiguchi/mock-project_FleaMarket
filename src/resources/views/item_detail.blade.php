@@ -5,45 +5,85 @@
 @endsection
 
 @section('content')
+@php
+    $hidePages = ['login', 'register'];
+@endphp
 <div class="content">
     <div class="content__item">
-        <p class="item__box">商品画像</p> <!--商品画像_仮置き-->
+        <img class="item__box" src="{{ asset('storage/' . $item->image) }}" alt="商品画像">
     </div>
     <div class="content__detail">
         <div class="detail__item">
-            <h1 class="detail__title">商品名がここに入る</h1>
-            <p class="detail__brand">ブランド名</p>
-            <p class="detail__price">&yen;47,000</p> <!--金額_仮置き-->
-            <span class="detail__tax">(税込み)</span>
-            <span>いいねマーク</span> <!--いいね画像_仮置き-->
-            <span>コメントマーク</span> <!--コメント画像_仮置き-->
-            <a class="bottun-submit" href="/purchase/{item_id}">購入手続きへ</a>
+            <h1 class="detail__title-h1">{{ $item->name }}</h1>
+            <p class="detail__brand">{{ $item->brand }}</p>
+            <p class="detail__price">&yen;{{ $item->price }}</p>
+            <p class="detail__tax">(税込)</p>
+            <div class="like__comment">
+                <form class="like__form" action="{{ route('items.like', $item) }}" method="post">
+                    @csrf
+                    <button type="submit" class="like__button">
+                        <!-- <img class="img__like" src="{{ asset('images/heart-logo_default.png') }}" alt="いいね" > -->
+                        <img class="img__like" src="{{ asset($item->isLikedBy(auth()->user()) ? 'images/heart-logo_pink.png' : 'images/heart-logo_default.png') }}" alt="いいね" >
+                        <p class="like__count">{{ $item->likes_count }}</p>
+                    </button>
+                </form>
+                <div class="comment__group">
+                    <img class="img__comment" src="{{ asset('images/comment-logo.png') }}" alt="コメント" >
+                    <p class="comment__count">{{ $item->comments_count }}</p>
+                </div>
+            </div>
+            <a class="bottun-submit-buy" href="{{ route('order.show', $item->id) }}">購入手続きへ</a>
         </div>
         <div class="detail__description">
-            <h2 class="detail__title">商品説明</h2>
-            <p class="detail__color">カラー：グレー</p>
-            <p class="detail__text">新品</p>
-            <p class="detail__text">商品の状態は良好です。傷もありません。購入後、即配送いたします。</p>
+            <h2 class="detail__title-h2">商品説明</h2>
+            <p class="detail__text">{{ $item->description }}</p>
         </div>
         <div class="detail__info">
-            <h3 class="detail__title">商品の情報</h3>
-            <p class="detail__category-title">カテゴリー</p>
-            <span class="detail__category">複数のカテゴリがここに入る</span>
+            <h3 class="detail__title-h3">商品の情報</h3>
+            <div class="detail__category">
+                <p class="detail__category-title">カテゴリー</p>
+                @foreach($item->categories as $category)
+                    <span class="category-label">{{ $category['name'] }}</span>
+                @endforeach
+            </div>
             <p class="detail__condition-title">商品の状態</p>
-            <span class="detail__condition">良好</span>
+            @if($item->condition == 1)
+                <span class="detail__condition">良好</span>
+            @elseif($item->condition == 2)
+                <span class="detail__condition">目立った傷や汚れなし</span>
+            @elseif($item->condition == 3)
+                <span class="detail__condition">やや傷や汚れあり</span>
+            @elseif($item->condition == 4)
+                <span class="detail__condition">状態が悪い</span>
+            @endif
         </div>
         <div class="detail__comment">
-            <h4 class="detail__title">コメント(1)</h4>
-            <p class="comment__icon">ユーザーのアイコン画像</p>
-            <span class="comment__userName">admin</span>
-            <p class="comment__text">こちらにコメントが入ります。</p>
+            <h4 class="detail__title-h4">コメント</h4>
+            @foreach($comments as $comment)
+                <img class="user__icon" src="{{ asset('storage/' . $comment->user->icon) }}" alt="">
+                <span class="comment__userName">{{ $comment->user->name }}</span>
+                <div class="comment__text">
+                    <p class="comment__text-comment">{{ $comment->comment }}</p>
+                </div>
+            @endforeach
         </div>
         <div class="form__comment">
-            <h5 class="detail__title">商品へのコメント</h5>
-            <form class="comment__button" action="">
-                <textarea name="" id=""></textarea>
-                <button class="bottun-submit" type="submit">コメントを送信する</button>
-            </form>
+            <h5 class="detail__title-h5">商品へのコメント</h5>
+            @if (!Route::is($hidePages))
+                @guest
+                    <div class="comment__button">
+                        <textarea class="comment__textarea" readonly></textarea>
+                        <button class="bottun-submit" type="submit">コメントを送信する</button>
+                    </div>
+                @endguest
+                @auth
+                    <form class="comment__button" action="{{ route('comments.store', $item) }}" method="post">
+                        @csrf
+                        <textarea class="comment__textarea" name="comment" required></textarea>
+                        <button class="bottun-submit" type="submit">コメントを送信する</button>
+                    </form>
+                @endauth
+            @endif
         </div>
     </div>
 </div>

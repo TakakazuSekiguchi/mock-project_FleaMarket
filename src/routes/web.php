@@ -20,23 +20,35 @@ Route::get('/search', [ItemController::class, 'search'])->name('search');
 Route::get('/?tab=mylist', [ItemController::class, 'index']);
 
 //商品出品画面
-Route::get('/sell', [ItemPutUpController::class, 'index']);
-Route::post('/sell', [ItemPutUpController::class, 'store'])->name('items.store');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/sell', [ItemPutUpController::class, 'create']);
+    Route::post('/sell', [ItemPutUpController::class, 'store'])->name('items.store');
+});
 
-// Route::middleware('auth')->group(function () {
-//     Route::post('/sell', [ItemPutUpController::class, 'store'])->name('items.store');
-// });
+//プロフィール編集画面（設定画面）
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/mypage/profile', [UserController::class, 'edit']);
+    Route::patch('/mypage/profile', [UserController::class, 'update'])->name('profile.update');
+});
 
-//プロフィール画面・プロフィール編集画面（設定画面）
-Route::get('/mypage', [UserController::class, 'index']);
-Route::get('/mypage/profile', [UserController::class, 'edit']);
+//プロフィール画面
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/mypage', [UserController::class, 'index'])->name('mypage');
+});
 
 //商品詳細画面
-Route::get('/item/{item_id}', [ItemDetailController::class, 'index']);
+Route::get('/item/{item}', [ItemDetailController::class, 'show'])->name('items.show');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::post('/item/{item}/like', [ItemDetailController::class, 'toggleLike'])->name('items.like');
+    Route::post('/item/{item}/comments', [ItemDetailController::class, 'store'])->name('comments.store');
+});
 
 //商品購入画面・送付先住所変更画面
-Route::get('/purchase/{item_id}', [OrderController::class, 'index']);
-Route::get('/purchase/address/{item_id}', [OrderController::class, 'edit']);
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/purchase/{item}', [OrderController::class, 'show'])->name('order.show');
+    Route::get('/purchase/address/{item_id}', [OrderController::class, 'edit']);
+});
+
 
 //---------------------認証関連---------------------
 Route::get('/verify-email', [AuthController::class, 'show']);
@@ -56,34 +68,6 @@ Route::post('/email/verification-notification', function (Request $request) {
 // Route::get('/mypage/profile', function () {
 //     return view('myProfile');
 // })->middleware('verified');
-
-//メール未認証の場合の遷移を防止（URL直打ちでアクセスできないように）
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/?tab=mylist', function () {
-        return view('index');
-    });
-    Route::get('/sell', function () {
-        return view('item_putUp');
-    });
-    Route::get('/mypage/profile', function () {
-        return view('myProfile');
-    });
-    Route::get('/mypage', function () {
-        return view('mypage');
-    });
-    Route::get('/mypage?page=buy', function () {
-        return view('mypage');
-    });
-    Route::get('/mypage?page=sell', function () {
-        return view('mypage');
-    });
-    Route::get('/purchase/{item_id}', function () {
-        return view('order');
-    });
-    Route::get('/purchase/address/{item_id}', function () {
-        return view('address');
-    });
-});
 
 //メール未認証のユーザーに「/email/verify」へ誘導
 Route::get('/email/verify', function () {

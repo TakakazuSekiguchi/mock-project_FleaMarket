@@ -16,85 +16,85 @@ class CategoriesTableSeeder extends Seeder
     {
         $params = [
             'id' => 1,
-            'category' => 'ファッション'
+            'name' => 'ファッション'
         ];
         DB::table('categories')->insert($params);
 
         $params = [
             'id' => 2,
-            'category' => '家電'
+            'name' => '家電'
         ];
         DB::table('categories')->insert($params);
 
         $params = [
             'id' => 3,
-            'category' => 'インテリア'
+            'name' => 'インテリア'
         ];
         DB::table('categories')->insert($params);
 
         $params = [
             'id' => 4,
-            'category' => 'レディース'
+            'name' => 'レディース'
         ];
         DB::table('categories')->insert($params);
 
         $params = [
             'id' => 5,
-            'category' => 'メンズ'
+            'name' => 'メンズ'
         ];
         DB::table('categories')->insert($params);
 
         $params = [
             'id' => 6,
-            'category' => 'コスメ'
+            'name' => 'コスメ'
         ];
         DB::table('categories')->insert($params);
 
         $params = [
             'id' => 7,
-            'category' => '本'
+            'name' => '本'
         ];
         DB::table('categories')->insert($params);
 
         $params = [
             'id' => 8,
-            'category' => 'ゲーム'
+            'name' => 'ゲーム'
         ];
         DB::table('categories')->insert($params);
 
         $params = [
             'id' => 9,
-            'category' => 'スポーツ'
+            'name' => 'スポーツ'
         ];
         DB::table('categories')->insert($params);
 
         $params = [
             'id' => 10,
-            'category' => 'キッチン'
+            'name' => 'キッチン'
         ];
         DB::table('categories')->insert($params);
 
         $params = [
             'id' => 11,
-            'category' => 'ハンドメイド'
+            'name' => 'ハンドメイド'
         ];
         DB::table('categories')->insert($params);
 
         $params = [
             'id' => 12,
-            'category' => 'アクセサリー'
+            'name' => 'アクセサリー'
         ];
         DB::table('categories')->insert($params);
 
         $params = [
             'id' => 13,
-            'category' => 'おもちゃ'
+            'name' => 'おもちゃ'
         ];
         DB::table('categories')->insert($params);
 
         $params = [
             'id' => 14,
-            'category' => 'ベビー・キッズ'
+            'name' => 'ベビー・キッズ'
         ];
         DB::table('categories')->insert($params);
     }

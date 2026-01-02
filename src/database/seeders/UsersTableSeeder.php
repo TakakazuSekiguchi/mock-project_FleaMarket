@@ -18,7 +18,9 @@ class UsersTableSeeder extends Seeder
             'id' => 1,
             'name' => 'ユーザー1',
             'email' => 'user1@example.com',
-            'password' => 'aaaa',
+            'email_verified_at' => '2025-12-23 13:30:00',
+            'password' => 'aaaa0000',
+            'icon' => '',
         ];
         DB::table('users')->insert($params);
 
@@ -26,15 +28,9 @@ class UsersTableSeeder extends Seeder
             'id' => 2,
             'name' => 'ユーザー2',
             'email' => 'user2@example.com',
-            'password' => 'bbbb',
-        ];
-        DB::table('users')->insert($params);
-
-        $params = [
-            'id' => 3,
-            'name' => 'ユーザー3',
-            'email' => 'user3@example.com',
-            'password' => 'cccc',
+            'email_verified_at' => '2025-12-24 09:00:00',
+            'password' => 'bbbb1111',
+            'icon' => '',
         ];
         DB::table('users')->insert($params);
     }

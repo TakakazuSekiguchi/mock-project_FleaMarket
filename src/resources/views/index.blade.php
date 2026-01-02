@@ -13,8 +13,10 @@
             <div class="content__flex">
                 @foreach($items as $item)
                 <div class="content__item">
-                    <a class="item__box">商品画像</a> <!--商品画像_仮置き-->
-                    <a class="item__name">{{ $item->name }}</a>
+                    <img class="item__box" src="{{ asset('storage/' . $item->image) }}" alt="商品画像">
+                    <a class="item__name" href="{{ route('items.show', $item->id) }}">
+                        {{ $item->name }}
+                    </a>
                 </div>
                 @endforeach
             </div>
@@ -24,18 +26,18 @@
         <div class="tab-content">
             @if(Auth::check())
             <div class="content__flex">
-                <div class="content__item">
-                    <a class="item__box">マイページ商品画像</a> <!--商品画像_仮置き-->
+                <!-- <div class="content__item">
+                    <img class="item__box" src="{{ asset('images/logo.png') }}">
                     <a class="item__name">マイページ商品名</a>
-                </div>
+                </div> -->
+                @foreach($likes as $like)
                 <div class="content__item">
-                    <a class="item__box">マイページ商品画像</a> <!--商品画像_仮置き-->
-                    <a class="item__name">マイページ商品名</a>
+                    <img class="item__box" src="{{ asset('storage/' . $like->item->image) }}" alt="商品画像">
+                    <a class="item__name" href="{{ route('items.show', $like->item->id) }}">
+                        {{ $like->item->name }}
+                    </a>
                 </div>
-                <div class="content__item">
-                    <a class="item__box">マイページ商品画像</a> <!--商品画像_仮置き-->
-                    <a class="item__name">マイページ商品名</a>
-                </div>
+                @endforeach
             </div>
             @endif
         </div>

@@ -21,6 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'icon',
     ];
 
     /**
@@ -44,5 +45,17 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function items(){
         return $this->hasMany(Item::class);
+    }
+
+    public function addresses(){
+        return $this->hasone(Address::class);
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
+    public function likes(){
+        return $this->hasMany(Like::class);
     }
 }

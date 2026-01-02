@@ -8,20 +8,28 @@
 <div class="myProfile__content">
     <div class="myProfile__heading">
         <h1 class="myProfile__title">プロフィール設定</h1>
-        <div class="user__group">
-            <p class="user__icon"></p> <!--アイコン_仮置き-->
-            <a class="button__image__select" href="">画像を選択する</a>
-        </div>
     </div>
-    <form class="form" action="/?tab=mylist" method="post">
+    <form class="form" action="{{ route('profile.update') }}" method="post" enctype="multipart/form-data">
         @csrf
+        @method('PATCH')
+        <div class="user__group">
+            @if(auth()->user()->icon)
+                <img class="user__icon" src="{{ asset('storage/' . $user->icon) }}" alt="プロフィール画像">
+            @else
+                <p class="user__icon"></p>
+            @endif
+            <label class="button__image__select">
+                画像を選択する
+                <input type="file" name="image" hidden>
+            </label>
+        </div>
         <div class="form__group">
             <div class="form__group-title">
                 <p class="form__label-item">ユーザー名</p>
             </div>
             <div class="form__group-content">
                 <div class="form__input">
-                    <input class="form__input-text" type="text" name="name" value="{{ old('name') }}">
+                    <input class="form__input-text" type="text" name="name" value="{{ $user['name'] }}">
                 </div>
             </div>
         </div>
@@ -31,7 +39,7 @@
             </div>
             <div class="form__group-content">
                 <div class="form__input">
-                    <input class="form__input-text" type="text" name="postal_code" value="{{ old('postal_code') }}">
+                    <input class="form__input-text" type="text" name="postal_code" value="{{ old('postal_code', $address->postal_code ?? '') }}">
                 </div>
             </div>
         </div>
@@ -41,7 +49,7 @@
             </div>
             <div class="form__group-content">
                 <div class="form__input">
-                    <input class="form__input-text" type="text" name="address" value="{{ old('address') }}">
+                    <input class="form__input-text" type="text" name="address" value="{{ old('address', $address->address ?? '') }}">
                 </div>
             </div>
         </div>
@@ -51,7 +59,7 @@
             </div>
             <div class="form__group-content">
                 <div class="form__input">
-                    <input class="form__input-text" type="text" name="building" value="{{ old('building') }}">
+                    <input class="form__input-text" type="text" name="building" value="{{ old('building', $address->building ?? '') }}">
                 </div>
             </div>
         </div>
