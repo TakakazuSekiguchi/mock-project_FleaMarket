@@ -11,6 +11,7 @@ class Item extends Model
     
     protected $fillable = [
         'user_id',
+        'buyer_id',
         'condition',
         'name',
         'price',
@@ -35,6 +36,7 @@ class Item extends Model
     public function likes(){
         return $this->hasMany(Like::class);
     }
+    
     public function isLikedBy($user){
         if (!$user) {
             return false;

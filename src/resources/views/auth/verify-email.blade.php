@@ -11,7 +11,7 @@
         <p class="verify-email__text">メール認証を完了してください。</p>
     </div>
     <div class="form__button">
-        <button class="form__button-submit" >認証はこちらから</button>
+        <a class="form__button-submit" href="https://mailtrap.io/">認証はこちらから</a>
     </div>
     <form class="form" action="{{ route('verification.send') }}" method="post">
         @csrf

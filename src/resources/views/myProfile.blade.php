@@ -31,6 +31,11 @@
                 <div class="form__input">
                     <input class="form__input-text" type="text" name="name" value="{{ $user['name'] }}">
                 </div>
+                @error('name')
+                <div class="form__error">
+                    {{ $errors->first('name') }}
+                </div>
+                @enderror
             </div>
         </div>
         <div class="form__group">
@@ -41,6 +46,11 @@
                 <div class="form__input">
                     <input class="form__input-text" type="text" name="postal_code" value="{{ old('postal_code', $address->postal_code ?? '') }}">
                 </div>
+                @error('postal_code')
+                <div class="form__error">
+                    {{ $errors->first('postal_code') }}
+                </div>
+                @enderror
             </div>
         </div>
         <div class="form__group">
@@ -51,6 +61,11 @@
                 <div class="form__input">
                     <input class="form__input-text" type="text" name="address" value="{{ old('address', $address->address ?? '') }}">
                 </div>
+                @error('address')
+                <div class="form__error">
+                    {{ $errors->first('address') }}
+                </div>
+                @enderror
             </div>
         </div>
         <div class="form__group">

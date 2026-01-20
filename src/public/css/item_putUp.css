@@ -2,7 +2,12 @@
     margin: 0 auto;
     text-align: center;
     width: 50%;
-    /* background-color: yellow; */
+}
+
+.form__error {
+    height: 20px;
+    color: #ff0000;
+    text-align: left;
 }
 
 .item-image {
@@ -122,4 +127,12 @@
 /* フォーカス（キーボード操作対応） */
 .category-input:focus + .category-label {
     outline: 2px solid #66afe9;
+}
+
+@media screen and (max-width: 768px) {
+    .putUp__content {
+        margin: 0 auto;
+        text-align: center;
+        width: 75%;
+    }
 }

@@ -13,28 +13,30 @@
             <div class="content__flex">
                 @foreach($items as $item)
                 <div class="content__item">
-                    <img class="item__box" src="{{ asset('storage/' . $item->image) }}" alt="商品画像">
-                    <a class="item__name" href="{{ route('items.show', $item->id) }}">
-                        {{ $item->name }}
+                    <a class="item__card" href="{{ route('items.show', $item->id) }}">
+                        <img class="item__box" src="{{ asset('storage/' . $item->image) }}" alt="商品画像">
+                        <p class="item__name">{{ $item->name }}</p>
+                        @if($item->status == 1)
+                            <p class="item_sold">sold</p>
+                        @endif
                     </a>
                 </div>
                 @endforeach
             </div>
         </div>
-        <input type="radio" id="tab2" name="TAB">
+        <input type="radio" id="tab2" name="TAB" >
         <label class="tab-boder" for="tab2">マイページ</label>
         <div class="tab-content">
             @if(Auth::check())
             <div class="content__flex">
-                <!-- <div class="content__item">
-                    <img class="item__box" src="{{ asset('images/logo.png') }}">
-                    <a class="item__name">マイページ商品名</a>
-                </div> -->
-                @foreach($likes as $like)
+                @foreach($likeItems as $likeItem)
                 <div class="content__item">
-                    <img class="item__box" src="{{ asset('storage/' . $like->item->image) }}" alt="商品画像">
-                    <a class="item__name" href="{{ route('items.show', $like->item->id) }}">
-                        {{ $like->item->name }}
+                    <a class="item__card" href="{{ route('items.show', $likeItem->item->id) }}">
+                        <img class="item__box" src="{{ asset('storage/' . $likeItem->item->image) }}" alt="商品画像">
+                        <p class="item__name">{{ $likeItem->item->name }}</p>
+                        @if($likeItem->item->status == 1)
+                            <p class="item_sold">sold</p>
+                        @endif
                     </a>
                 </div>
                 @endforeach

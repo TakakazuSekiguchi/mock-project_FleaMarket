@@ -15,7 +15,9 @@
     @endphp
     <header class="header">
         <div class="header__inner">
-            <img class="header__img" src="{{ asset('images/logo.png') }}" alt="logo" >
+            <a href="/">
+                <img class="header__img" src="{{ asset('images/logo.png') }}" alt="logo" >
+            </a>
             @if (!Route::is($hidePages))
                 @guest
                     <form class="form__search" action="{{ route('search') }}" method="get">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use App\Models\Category;
+use App\Http\Requests\ExhibitionRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,15 +15,20 @@ class ItemPutUpController extends Controller
         return view('item_putUp', compact('categories'));
     }
 
-    public function store(Request $request){
+    public function store(ExhibitionRequest $request){
+        //【本番用】画像のpathをstorage/itemsで管理
         $path = $request->file('image')->store('items', 'public');
+
+        //【seederファイル用】画像オリジナルファイル名をstorage/itemsに取り込む際に使用
+        // $path = $request->file('image')->getClientOriginalName();
+        // request()->file('image')->move('storage/items', $path);
 
         $item = Item::create([
             'user_id' => Auth::id(),
             'condition' => $request->condition,
             'name' => $request->name,
             'price' => $request->price,
-            'status' => 1,
+            'status' => 0,
             'brand' => $request->brand,
             'description' => $request->description,
             'image' => $path,

@@ -2,13 +2,10 @@
     display: flex;
     justify-content: center;
     margin: 0 auto;
-    width: 80%;
-    /* background-color: yellow; */
 }
 
 .content__item {
     margin: 0 30px;
-    /* background-color: red; */
 }
 
 .item__box {
@@ -22,17 +19,11 @@
 
 .content__detail {
     margin: 0 30px;
-    /* background-color: blue; */
 }
-
-/* .detail__item {
-    background-color: blue;
-} */
 
 .detail__title-h1 {
     margin-bottom: 0px;
     font-size: 30px;
-    /* background-color: red; */
 }
 
 .detail__title-h2 , .detail__title-h3 {
@@ -70,6 +61,21 @@
     font-size: 14px;
 }
 
+.item_sold {
+    display: inline-block;
+    padding: 1px;
+    margin-left: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #fa5656;
+    font-size: 20px;
+    font-weight: bold;
+    border: 1.5px solid #fa5656;
+    border-radius: 10px;
+    width: 70px;
+    height: 35px;
+}
+
 .like__comment {
     display: flex;
 }
@@ -80,14 +86,30 @@
     height: 20px;
 }
 
+.img__like-seller {
+    margin: 0;
+    width: 20px;
+    height: 20px;
+}
+
 .like__button {
     width: 40px;
     border: none;
     background: none;
 }
 
+.like__button-seller {
+    margin: 0px 10px;
+}
+
 .like__count {
     margin: 0 auto 10px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.like__count-seller {
+    margin: 0 auto;
     font-size: 12px;
     text-align: center;
 }
@@ -146,7 +168,7 @@
     font-weight: bold;
 }
 
-.bottun-submit-buy {
+.button-submit-buy {
     display: inline-block;
     text-align: center;
     padding: 5px;
@@ -177,7 +199,7 @@
     margin-bottom: 20px;
 }
 
-.bottun-submit {
+.button-submit {
     padding: 5px;
     margin-bottom: 20px;
     width: 100%;
@@ -189,4 +211,29 @@
     color: #fff;
     font-size: 20px;
     cursor: pointer;
+}
+
+.form__error {
+    height: 20px;
+    color: #ff0000;
+    text-align: left;
+}
+
+@media screen and (max-width: 768px) {
+    .content__item {
+        margin: 0 25px;
+    }
+
+    .item__box {
+        display: block;
+        margin-top: 25px;
+        width: 200px;
+        height: 200px;
+        background-color: #ddd;
+        text-align: center;
+    }
+
+    .content__detail {
+        margin: 0 25px;
+    }
 }

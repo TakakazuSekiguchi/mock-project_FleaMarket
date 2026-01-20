@@ -26,10 +26,15 @@
         <label class="tab-boder" for="tab1">出品した商品</label>
         <div class="tab-content">
             <div class="content__flex">
-                @foreach($items as $item)
+                @foreach($sellingItems as $sellingItem)
                 <div class="content__item">
-                    <img class="item__box" src="{{ asset('storage/' . $item->image) }}" alt="商品画像">
-                    <a class="item__name">{{ $item->name }}</a>
+                    <a class="item__card" href="{{ route('items.show', $sellingItem->id) }}">
+                        <img class="item__box" src="{{ asset('storage/' . $sellingItem->image) }}" alt="商品画像">
+                        <p class="item__name">{{ $sellingItem->name }}</p>
+                        @if($sellingItem->status == 1)
+                            <p class="item_sold">sold</p>
+                        @endif
+                    </a>
                 </div>
                 @endforeach
             </div>
@@ -39,18 +44,17 @@
         <div class="tab-content">
             @if(Auth::check())
             <div class="content__flex">
+                @foreach($purchasedItems as $purchasedItem)
                 <div class="content__item">
-                    <a class="item__box">購入した商品画像</a> <!--商品画像_仮置き-->
-                    <a class="item__name">購入した商品名</a>
+                    <a class="item__card" href="{{ route('items.show', $purchasedItem->id) }}">
+                        <img class="item__box" src="{{ asset('storage/' . $purchasedItem->image) }}" alt="商品画像">
+                        <p class="item__name">{{ $purchasedItem->name }}</p>
+                        @if($purchasedItem->status == 1)
+                            <p class="item_sold">sold</p>
+                        @endif
+                    </a>
                 </div>
-                <div class="content__item">
-                    <a class="item__box">購入した商品画像</a> <!--商品画像_仮置き-->
-                    <a class="item__name">購入した商品名</a>
-                </div>
-                <div class="content__item">
-                    <a class="item__box">購入した商品画像</a> <!--商品画像_仮置き-->
-                    <a class="item__name">購入した商品名</a>
-                </div>
+                @endforeach
             </div>
             @endif
         </div>

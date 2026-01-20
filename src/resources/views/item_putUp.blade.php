@@ -17,6 +17,11 @@
                     <input type="file" name="image" hidden>
                 </label>
             </div>
+            @error('image')
+            <div class="form__error">
+                {{ $errors->first('image') }}
+            </div>
+            @enderror
         </div>
         <div class="item-detail">
             <h2 class="item-detail__title">商品の詳細</h2>
@@ -26,6 +31,11 @@
                 <p class="form__label-item">カテゴリー</p>
             </div>
             <div class="form__group-content">
+                @error('category_ids')
+                <div class="form__error">
+                    {{ $errors->first('category_ids') }}
+                </div>
+                @enderror
                 <div class="form__category">
                     @foreach ($categories as $category)
                         <input
@@ -49,13 +59,18 @@
             <div class="form__group-content">
                 <div class="form__input">
                     <select class="select__condition" name="condition">
-                        <option>選択してください</option>
+                        <option value="">選択してください</option>
                         <option value=1>良好</option>
                         <option value=2>目立った傷や汚れなし</option>
                         <option value=3>やや傷や汚れあり</option>
                         <option value=4>状態が悪い</option>
                     </select>
                 </div>
+                @error('condition')
+                <div class="form__error">
+                    {{ $errors->first('condition') }}
+                </div>
+                @enderror
             </div>
         </div>
         <div class="item-explanation">
@@ -69,6 +84,11 @@
                 <div class="form__input">
                     <input class="form__input-text" type="text" name="name" value="{{ old('name') }}">
                 </div>
+                @error('name')
+                <div class="form__error">
+                    {{ $errors->first('name') }}
+                </div>
+                @enderror
             </div>
         </div>
         <div class="form__group">
@@ -89,6 +109,11 @@
                 <div class="form__textarea">
                     <textarea class="form__textarea-text" name="description"></textarea>
                 </div>
+                @error('description')
+                <div class="form__error">
+                    {{ $errors->first('description') }}
+                </div>
+                @enderror
             </div>
         </div>
         <div class="form__group">
@@ -99,6 +124,11 @@
                 <div class="form__input">
                     <input class="form__input-text" type="text" name="price" value="{{ old('price') }}" placeholder="&yen;">
                 </div>
+                @error('price')
+                <div class="form__error">
+                    {{ $errors->first('price') }}
+                </div>
+                @enderror
             </div>
         </div>
         <div class="form__button">

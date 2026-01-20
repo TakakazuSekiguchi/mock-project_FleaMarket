@@ -17,9 +17,9 @@ class ItemController extends Controller
         }
 
         $items = $query->get();
-        $likes = Like::where('user_id', auth()->id())->with('item')->get();
+        $likeItems = Like::where('user_id', auth()->id())->with('item')->get();
 
-        return view('index', compact('items', 'likes'));
+        return view('index', compact('items', 'likeItems'));
     }
 
     public function search(Request $request){
@@ -28,7 +28,21 @@ class ItemController extends Controller
         $items = Item::where('user_id', '!=', auth()->id())->when($keyword, function ($query) use ($keyword) {
             $query->where('name', 'like', "%{$keyword}%");
         })->get();
+        $likes = Like::where('user_id', auth()->id())->with('item')->get();
 
-        return view('index', compact('items', 'keyword'));
+        return view('index', compact('items', 'likes', 'keyword'));
+    }
+
+    public function mylist(){
+        $query = Item::query();
+
+        if (Auth::check()) {
+            $query->where('user_id', '!=', Auth::id());
+        }
+
+        $items = $query->get();
+        $likeItems = Like::where('user_id', auth()->id())->with('item')->get();
+
+        return view('index', compact('items', 'likeItems'));
     }
 }

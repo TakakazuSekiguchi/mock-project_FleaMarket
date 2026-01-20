@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Address;
 use App\Models\Item;
 use App\Models\Order;
+use App\Http\Requests\ProfileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +20,7 @@ class UserController extends Controller
     }
 
     //プロフィール編集画面のフォーム送信
-    public function update(Request $request){
+    public function update(ProfileRequest $request){
         $user = auth()->user();
 
         if($request->hasFile('image')){
@@ -42,15 +43,21 @@ class UserController extends Controller
                 'building' => $request->building,
             ]
         );
-        return redirect()->back()->with('success', 'プロフィールを更新しました');
+        return redirect()->route('items.mylist');
     }
 
     //マイページを表示
     public function index(Request $request){
         $user = Auth::user();
-        $page = Item::query();
-        $items = Item::where('user_id', $user->id)->get();
 
-        return view('mypage', compact('user', 'items', 'page'));
+        // 出品商品
+        $sellingItems = Item::where('user_id', $user->id)->get();
+
+        // 購入商品（購入者が自分）
+        $purchasedItems = Item::where('buyer_id', $user->id)
+            ->where('status', 1)
+            ->get();
+
+        return view('mypage', compact('user', 'sellingItems', 'purchasedItems'));
     }
 }

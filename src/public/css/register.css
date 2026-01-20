@@ -57,3 +57,10 @@
     margin-top: 20px;
     text-align: center;
 }
+
+@media screen and (max-width: 768px) {
+    .form {
+            margin: 0 auto;
+            width: 75%;
+    }
+}

@@ -18,21 +18,39 @@
             <p class="detail__brand">{{ $item->brand }}</p>
             <p class="detail__price">&yen;{{ $item->price }}</p>
             <p class="detail__tax">(税込)</p>
+            @if($item->status == 1)
+                <p class="item_sold">sold</p>
+            @endif
             <div class="like__comment">
-                <form class="like__form" action="{{ route('items.like', $item) }}" method="post">
-                    @csrf
-                    <button type="submit" class="like__button">
-                        <!-- <img class="img__like" src="{{ asset('images/heart-logo_default.png') }}" alt="いいね" > -->
-                        <img class="img__like" src="{{ asset($item->isLikedBy(auth()->user()) ? 'images/heart-logo_pink.png' : 'images/heart-logo_default.png') }}" alt="いいね" >
-                        <p class="like__count">{{ $item->likes_count }}</p>
-                    </button>
-                </form>
+                @if(Auth::id() !== $item->user_id)      
+                    <form class="like__form" action="{{ route('items.like', $item) }}" method="post">
+                        @csrf
+                        <button type="submit" class="like__button">
+                            <img class="img__like" src="{{ asset($item->isLikedBy(auth()->user()) ? 'images/heart-logo_pink.png' : 'images/heart-logo_default.png') }}" alt="いいね" >
+                            <p class="like__count">{{ $item->likes_count }}</p>
+                        </button>
+                    </form>
+                @else
+                    <div class="like__button-seller">
+                        <img class="img__like-seller" src="{{ asset($item->isLikedBy(auth()->user()) ? 'images/heart-logo_pink.png' : 'images/heart-logo_default.png') }}" alt="いいね" >
+                        <p class="like__count-seller">{{ $item->likes_count }}</p>
+                    </div>
+                @endif
                 <div class="comment__group">
                     <img class="img__comment" src="{{ asset('images/comment-logo.png') }}" alt="コメント" >
                     <p class="comment__count">{{ $item->comments_count }}</p>
                 </div>
             </div>
-            <a class="bottun-submit-buy" href="{{ route('order.show', $item->id) }}">購入手続きへ</a>
+            @if(Auth::id() !== $item->user_id)
+                @if($item->status == 1)
+                    <p class="text-danger">※この商品はすでに購入されています</p>
+                @else
+                    <!-- 出品者以外が購入可能 -->
+                    <a class="button-submit-buy" href="{{ route('purchase.show', $item->id) }}">購入手続きへ</a>
+                @endif
+            @else
+                <p class="text-danger">※出品者は自分の商品を購入できません</p>
+            @endif
         </div>
         <div class="detail__description">
             <h2 class="detail__title-h2">商品説明</h2>
@@ -69,18 +87,23 @@
         </div>
         <div class="form__comment">
             <h5 class="detail__title-h5">商品へのコメント</h5>
+            @error('comment')
+            <div class="form__error">
+                {{ $errors->first('comment') }}
+            </div>
+            @enderror
             @if (!Route::is($hidePages))
                 @guest
                     <div class="comment__button">
                         <textarea class="comment__textarea" readonly></textarea>
-                        <button class="bottun-submit" type="submit">コメントを送信する</button>
+                        <button class="button-submit" type="submit">コメントを送信する</button>
                     </div>
                 @endguest
                 @auth
                     <form class="comment__button" action="{{ route('comments.store', $item) }}" method="post">
                         @csrf
                         <textarea class="comment__textarea" name="comment" required></textarea>
-                        <button class="bottun-submit" type="submit">コメントを送信する</button>
+                        <button class="button-submit" type="submit">コメントを送信する</button>
                     </form>
                 @endauth
             @endif

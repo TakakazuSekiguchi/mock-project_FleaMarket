@@ -10,14 +10,15 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ItemDetailController;
 use App\Http\Controllers\ItemPutUpController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\MailSendController;
+use App\Http\Controllers\AddressController;
+// use App\Http\Controllers\MailSendController;
 
 //商品一覧画面（トップ画面）
-Route::get('/', [ItemController::class, 'index'])->name('index');
+Route::get('/', [ItemController::class, 'index'])->name('items.index');
 Route::get('/search', [ItemController::class, 'search'])->name('search');
 
 //商品一覧画面（トップ画面）_マイリスト
-Route::get('/?tab=mylist', [ItemController::class, 'index']);
+Route::get('/?tab=mylist', [ItemController::class, 'mylist'])->name('items.mylist');
 
 //商品出品画面
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -43,14 +44,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/item/{item}/comments', [ItemDetailController::class, 'store'])->name('comments.store');
 });
 
-//商品購入画面・送付先住所変更画面
+//商品購入画面
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/purchase/{item}', [OrderController::class, 'show'])->name('order.show');
-    Route::get('/purchase/address/{item_id}', [OrderController::class, 'edit']);
+    Route::get('/purchase/{item}', [OrderController::class, 'show'])->name('purchase.show');
+    Route::post('/purchase/{item}/order', [OrderController::class, 'store'])->name('purchase.store');
 });
 
+//送付先住所変更画面
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/purchase/address/{item}', [AddressController::class, 'edit'])->name('address.edit');
+    Route::patch('/purchase/address/update', [AddressController::class, 'update'])->name('address.update');
+});
 
-//---------------------認証関連---------------------
+/*---------------------認証関連---------------------*/
 Route::get('/verify-email', [AuthController::class, 'show']);
 
 // 認証メールのリンククリック処理
@@ -65,24 +71,13 @@ Route::post('/email/verification-notification', function (Request $request) {
     return back()->with('message', '確認メールを再送しました。');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
-// Route::get('/mypage/profile', function () {
-//     return view('myProfile');
-// })->middleware('verified');
-
 //メール未認証のユーザーに「/email/verify」へ誘導
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
-
-// Route::middleware('auth')->group(function(){
-//     Route::get('/?tab=mylist', [AuthController::class, 'index']);
-// });
+/*---------------------------------------------------*/
 
 //メール送信テスト
-Route::get('/mail', [MailSendController::class, 'index']);
+// Route::get('/mail', [MailSendController::class, 'index']);
 
-//メール認証テスト
-// Route::get('/test', function () {
-//     return Auth::user()->hasVerifiedEmail() ? 'verified' : 'not verified';
-// })->middleware('auth');
 

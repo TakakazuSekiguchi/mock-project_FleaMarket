@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\User;
 use App\Models\Like;
 use App\Models\Comment;
+use App\Http\Requests\CommentRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,8 +39,7 @@ class ItemDetailController extends Controller
         return back();
     }
 
-    public function store(Request $request, Item $item){
-        // dd($item);
+    public function store(CommentRequest $request, Item $item){
         Comment::create([
             'user_id' => auth()->id(),
             'item_id' => $item->id,

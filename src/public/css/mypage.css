@@ -6,6 +6,7 @@
 .user__group {
     display: flex;
     justify-content: space-between;
+    /* background-color: yellow; */
 }
 
 .user__group-icon {
@@ -76,7 +77,6 @@
     width: 100%;
     padding: 1.5em 0;
     border-top: 2px solid #ddd;
-    /* background-color: yellow; */
 }
 
 /* 選択されたタブ＋コンテンツを表示 */
@@ -92,13 +92,23 @@
 .content__flex {
     display: flex;
     flex-wrap: wrap;
-    /* flex-direction: row; */
+    margin-left: 10px;
+}
+
+/* .content__item {
+    margin: 20px;
+} */
+
+.item__card {
+    display: inline-block;
+    margin: 15px;
+    text-decoration: none;
+    color: #000;
 }
 
 .item__box {
     display: block;
-    margin: 10px;
-    margin-left: 30px;
+    margin: 0px;
     width: 200px;
     height: 200px;
     background-color: #ddd;
@@ -106,5 +116,45 @@
 }
 
 .item__name {
-    margin-left: 30px;
+    display: inline;
+    margin-top: 0px;
+}
+
+.item_sold {
+    display: inline;
+    padding: 0px 5px;
+    margin-left: 5px;
+    text-align: center;
+    text-decoration: none;
+    color: #fa5656;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1.5px solid #fa5656;
+    border-radius: 5px;
+    width: 100px;
+    height: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .user {
+        margin: 0 auto;
+        width: 80%;
+    }
+
+    .tab-boder {
+        width: 20%;
+    }
+
+    .content__flex {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: 20px;
+    }
+
+    .item__card {
+        display: inline-block;
+        margin: 20px;
+        text-decoration: none;
+        color: #000;
+    }
 }
