@@ -128,19 +128,19 @@ Featureテスト、Unitテストを中心に実装しています。<br>
 - メール認証機能
 
 ### テスト環境構築
-1. `.env` をコピーして `.env.testing` を作成
+1. `.env` をコピーして `.env.testing` を作成<br>
 docker-compose exec php bash<br>
 cp .env .env.testing<br>
 exit<br>
 
-2. `.env.testing` のAPP_ENVとAPP_KEY=を以下のように変更
+2. `.env.testing` のAPP_ENVとAPP_KEY=を以下のように変更<br>
 APP_ENV=test<br>
 APP_KEY=<br>
 
 ※ APP_KEYはテスト用に再生成するため、一度空にしてください。<br>
 その後、後述のコマンド（key:generate）でテスト用キーを生成します。<br>
 
-3. `.env.testing` のDB設定を以下のように変更
+3. `.env.testing` のDB設定を以下のように変更<br>
 DB_DATABASE=demo_test<br>
 DB_USERNAME=root<br>
 DB_PASSWORD=root<br>
