@@ -19,6 +19,15 @@ Laravelを用いて開発したフリマアプリです。<br>
 3. .envを作成
 - cp .env.example .env
 
+Stripe のテストキーを設定<br>
+.env ファイルを開き、以下を追記してください。<br>
+
+STRIPE_KEY=pk_test_xxxxxxxxxxxxxx<br>
+STRIPE_SECRET=sk_test_xxxxxxxxxxxxxx<br>
+STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxxxxxxx<br>
+
+※ Stripe のテストキーは Stripe ダッシュボードから取得してください。<br>
+
 4. アプリキー生成
 - docker-compose exec php php artisan key:generate
 
@@ -31,6 +40,12 @@ Laravel の標準的な構成に従い、画像は storage/app/public に保存�
 そのため、clone 後に以下のコマンドを実行してください。<br>
 
 - docker-compose exec php php artisan storage:link
+
+### Stripe テストキーの取得方法
+1. Stripe にログイン
+2. ダッシュボード右上の「開発者」→「APIキー」
+3. 公開可能キー（pk_test_）とシークレットキー（sk_test_）をコピー
+4. Webhook シークレットは Stripe CLI 実行後に表示される
 
 ## 画面定義
 - phpMyAdmin：http://localhost:8080/
