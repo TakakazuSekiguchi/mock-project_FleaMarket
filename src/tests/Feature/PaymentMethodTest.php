@@ -9,7 +9,7 @@ use App\Models\Item;
 use App\Models\User;
 use App\Models\Address;
 use Stripe\Checkout\Session;
-// use Mockery;
+use Mockery;
 
 //支払方法の選択について、JSを使用し小計画面表示をしている為、
 //カード払いとコンビニ支払がそれぞれStripeに渡せているか、を確認することで代替

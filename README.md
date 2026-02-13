@@ -100,6 +100,13 @@ Stripe Checkoutを利用して決済機能を実装しています。<br>
 - success_urlではなくWebhookで購入確定処理を行うことで、決済未完了状態での不整合を防いでいます。
 - 購入レコード作成と商品ステータス更新は、トランザクションで実行しデータ整合性を保証しています。
 
+### ブラウザ上で操作する際の注意点
+powershellを開いて以下コマンドを実行してください。<br>
+※こちらを行わないと、購入情報がlaravelのDBに反映されません。<br>
+
+- stripe listen --forward-to http://localhost/api/webhook
+
+
 ## セキュリティ対策
 - メール認証必須
 - CSRF対策（Laravel標準機能）
