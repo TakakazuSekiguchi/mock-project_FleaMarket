@@ -1,0 +1,239 @@
+.content {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.content__item {
+    margin: 0 30px;
+}
+
+.item__box {
+    display: block;
+    margin-top: 50px;
+    width: 300px;
+    height: 300px;
+    background-color: #ddd;
+    text-align: center;
+}
+
+.content__detail {
+    margin: 0 30px;
+}
+
+.detail__title-h1 {
+    margin-bottom: 0px;
+    font-size: 30px;
+}
+
+.detail__title-h2 , .detail__title-h3 {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 0px;
+}
+
+.detail__title-h4 {
+    font-weight: bold;
+    font-size: 24px;
+    color: #6b6b6b;
+    margin-bottom: 10px;
+}
+
+.detail__title-h5 {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.detail__brand {
+    font-size: 14px;
+    margin-top: 0px;
+}
+
+.detail__price {
+    display: inline-block;
+    font-size: 30px;
+    margin: 0px;
+}
+
+.detail__tax {
+    display: inline-block;
+    font-size: 14px;
+}
+
+.item_sold {
+    display: inline-block;
+    padding: 1px;
+    margin-left: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #fa5656;
+    font-size: 20px;
+    font-weight: bold;
+    border: 1.5px solid #fa5656;
+    border-radius: 10px;
+    width: 70px;
+    height: 35px;
+}
+
+.like__comment {
+    display: flex;
+}
+
+.img__like {
+    margin: 3px 0;
+    width: 20px;
+    height: 20px;
+}
+
+.img__like-seller {
+    margin: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.like__button {
+    width: 40px;
+    border: none;
+    background: none;
+}
+
+.like__button-seller {
+    margin: 0px 10px;
+}
+
+.like__count {
+    margin: 0 auto 10px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.like__count-seller {
+    margin: 0 auto;
+    font-size: 12px;
+    text-align: center;
+}
+
+.comment__group {
+    width: 40px;
+}
+
+.img__comment {
+    display: block;
+    margin: 3px auto 0px;
+    width: 20px;
+    height: 20px;
+}
+
+.comment__count {
+    margin: 0 auto 5px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.detail__category {
+    display: block;
+}
+
+.detail__category-title {
+    display: inline;
+    margin-right: 40px;
+    font-weight: bold;
+}
+
+.category-label {
+    display: inline-block;
+    padding: 3px 16px;
+    margin: 6px;
+    border-radius: 20px;
+    background-color: #ddd;
+    color: #000;
+}
+
+.detail__condition-title {
+    display: inline-block;
+    margin-right: 40px;
+    font-weight: bold;
+}
+
+.user__icon {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ddd;
+}
+
+.comment__userName {
+    font-weight: bold;
+}
+
+.button-submit-buy {
+    display: inline-block;
+    text-align: center;
+    padding: 5px;
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 3px;
+    text-decoration: none;
+    background: #fa5656;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.comment__text {
+    background-color: #ddd;
+    border-radius: 3px;
+}
+
+.comment__text-comment {
+    padding: 10px;
+    font-size: 12px;
+}
+
+.comment__textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.button-submit {
+    padding: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 3px;
+    text-decoration: none;
+    background: #fa5656;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.form__error {
+    height: 20px;
+    color: #ff0000;
+    text-align: left;
+}
+
+@media screen and (max-width: 768px) {
+    .content__item {
+        margin: 0 25px;
+    }
+
+    .item__box {
+        display: block;
+        margin-top: 25px;
+        width: 200px;
+        height: 200px;
+        background-color: #ddd;
+        text-align: center;
+    }
+
+    .content__detail {
+        margin: 0 25px;
+    }
+}

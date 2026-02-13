@@ -1,0 +1,138 @@
+.putUp__content {
+    margin: 0 auto;
+    text-align: center;
+    width: 50%;
+}
+
+.form__error {
+    height: 20px;
+    color: #ff0000;
+    text-align: left;
+}
+
+.item-image {
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.item-image__select {
+    display: flex;
+    align-items: center;
+    border: 1.5px dotted #000;
+    border-radius: 3px;
+    height: 100px;
+}
+
+.button__image__select {
+    margin: 0 auto;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    color: #fa5656;
+    font-weight: bold;
+    border: 1.5px solid #fa5656;
+    border-radius: 10px;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.item-detail__title, .item-explanation__title {
+    text-align: left;
+    color: #727272;
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.item-detail, .item-explanation {
+    border-bottom: 1.5px solid #727272;
+}
+
+.form__group {
+    margin-bottom: 50px;
+    /* background-color: yellow; */
+}
+
+.form__label-item {
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.form__category {
+    text-align: left;
+}
+
+.select__condition, .form__input-text {
+    width: 100%;
+    height: 35px;
+}
+
+.form__textarea-text {
+    width: 100%;
+    height: 150px;
+}
+
+.form__button {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.form__button-submit {
+    padding: 10px;
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 3px;
+    background: #fa5656;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    margin-bottom: 100px;
+}
+
+/* チェックボックスを非表示（機能は残す） */
+.category-input {
+    position: absolute;
+    opacity: 0;
+}
+
+/* ボタン風ラベル */
+.category-label {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 6px;
+    border: 1px solid #fa5656;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: #fff;
+    color: #fa5656;
+    user-select: none;
+    transition: all 0.2s ease;
+}
+
+/* 選択時 */
+.category-input:checked + .category-label {
+    background-color: #fa5656;
+    color: #fff;
+    border-color: #fa5656;
+}
+
+/* ホバー */
+.category-label:hover {
+    background-color: #f0f0f0;
+}
+
+/* フォーカス（キーボード操作対応） */
+.category-input:focus + .category-label {
+    outline: 2px solid #66afe9;
+}
+
+@media screen and (max-width: 768px) {
+    .putUp__content {
+        margin: 0 auto;
+        text-align: center;
+        width: 75%;
+    }
+}
