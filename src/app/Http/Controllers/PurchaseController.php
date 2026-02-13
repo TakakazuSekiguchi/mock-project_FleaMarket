@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
 use Stripe\Checkout\Session;
+use App\Services\StripeService;
 
 class PurchaseController extends Controller
 {
@@ -36,7 +37,7 @@ class PurchaseController extends Controller
         ]);
     }
 
-    public function checkout(PurchaseRequest $request, Item $item){
+    public function checkout(PurchaseRequest $request, Item $item, StripeService $stripe){
         $buyer = auth()->user();
         $address = Address::where('user_id', "{$buyer->id}")->first();
 
@@ -65,7 +66,8 @@ class PurchaseController extends Controller
 
         Stripe::setApiKey(config('services.stripe.secret'));
 
-        $session = Session::create([
+        // $session = Session::create([
+        $session = $stripe->createSession([
             'payment_method_types' => $paymentTypes,
 
             'line_items' => [[
