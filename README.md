@@ -1,9 +1,9 @@
 # mock-project_FleaMarket
 
 ## 概要
-Laravelを用いて開発したフリマアプリです。
-出品、購入、コメント、いいね機能を実装しています。
-決済にはStripeを使用しています。
+Laravelを用いて開発したフリマアプリです。<br>
+出品、購入、コメント、いいね機能を実装しています。<br>
+決済にはStripeを使用しています。<br>
 
 模擬案件として、Dockerによる開発環境構築から、
 データベース設計・決済処理・テスト実装まで一貫して開発しました。
@@ -27,8 +27,8 @@ Laravelを用いて開発したフリマアプリです。
 - docker-compose exec php php artisan db:seed
 
 6. 画像表示について
-Laravel の標準的な構成に従い、画像は storage/app/public に保存しています。
-そのため、clone 後に以下のコマンドを実行してください。
+Laravel の標準的な構成に従い、画像は storage/app/public に保存しています。<br>
+そのため、clone 後に以下のコマンドを実行してください。<br>
 
 - docker-compose exec php php artisan storage:link
 
@@ -64,23 +64,23 @@ Laravel の標準的な構成に従い、画像は storage/app/public に保存�
 - 重複購入防止のため商品ステータスを管理
 
 ## メール認証機能
-LaravelのEmail Verification機能を利用し、会員登録時にメール認証を必須としています。
-未認証ユーザーはログイン後も一部機能にアクセスできない仕様としています。
+LaravelのEmail Verification機能を利用し、会員登録時にメール認証を必須としています。<br>
+未認証ユーザーはログイン後も一部機能にアクセスできない仕様としています。<br>
 
-開発環境ではMailtrapを使用し、送信メールの動作確認を行っています。
-.envファイルについて、My SandboxのUsername、Passwordを確認し、
-自身の設定値に変更してください。
+開発環境ではMailtrapを使用し、送信メールの動作確認を行っています。<br>
+.envファイルについて、My SandboxのUsername、Passwordを確認し、<br>
+自身の設定値に変更してください。<br>
 
 ### Mail設定
-MAIL_MAILER=smtp
-MAIL_HOST=sandbox.smtp.mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=your_username
-MAIL_PASSWORD=your_password
-MAIL_ENCRYPTION=tls
+MAIL_MAILER=smtp<br>
+MAIL_HOST=sandbox.smtp.mailtrap.io<br>
+MAIL_PORT=2525<br>
+MAIL_USERNAME=your_username<br>
+MAIL_PASSWORD=your_password<br>
+MAIL_ENCRYPTION=tls<br>
 
 ## 決済機能（Stripe）
-Stripe Checkoutを利用して決済機能を実装しています。
+Stripe Checkoutを利用して決済機能を実装しています。<br>
 
 ### 実装方針
 - 決済確定前にDBを更新しない設計
@@ -109,7 +109,7 @@ Stripe Checkoutを利用して決済機能を実装しています。
 - Webhook署名検証による不正リクエスト防止
 
 ## テスト
-Featureテスト、Unitテストを中心に実装しています。
+Featureテスト、Unitテストを中心に実装しています。<br>
 
 - 会員登録機能
 - ログイン機能
@@ -129,24 +129,24 @@ Featureテスト、Unitテストを中心に実装しています。
 
 ### テスト環境構築
 1. `.env` をコピーして `.env.testing` を作成
-docker-compose exec php bash
-cp .env .env.testing
-exit
+docker-compose exec php bash<br>
+cp .env .env.testing<br>
+exit<br>
 
 2. `.env.testing` のAPP_ENVとAPP_KEY=を以下のように変更
-APP_ENV=test
-APP_KEY=
+APP_ENV=test<br>
+APP_KEY=<br>
 
-※ APP_KEYはテスト用に再生成するため、一度空にしてください。
-その後、後述のコマンド（key:generate）でテスト用キーを生成します。
+※ APP_KEYはテスト用に再生成するため、一度空にしてください。<br>
+その後、後述のコマンド（key:generate）でテスト用キーを生成します。<br>
 
 3. `.env.testing` のDB設定を以下のように変更
-DB_DATABASE=demo_test
-DB_USERNAME=root
-DB_PASSWORD=root
+DB_DATABASE=demo_test<br>
+DB_USERNAME=root<br>
+DB_PASSWORD=root<br>
 
-※【重要】本番用データベースと分離するため、テスト専用DBを使用しています。
-必ず『DB_DATABASE=demo_test』に書き換えるようお願いいたします。
+※【重要】本番用データベースと分離するため、テスト専用DBを使用しています。<br>
+必ず『DB_DATABASE=demo_test』に書き換えるようお願いいたします。<br>
 
 ### テスト用データベースを作成
 - docker-compose exec php php artisan key:generate --env=testing
@@ -155,5 +155,5 @@ DB_PASSWORD=root
 ### テスト実行
 - docker-compose exec php php artisan test
 
-※ テストでは RefreshDatabase を使用し、各テスト実行ごとにDBをリセットしています。
+※ テストでは RefreshDatabase を使用し、各テスト実行ごとにDBをリセットしています。<br>
 
