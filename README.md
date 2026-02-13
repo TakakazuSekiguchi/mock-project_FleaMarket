@@ -10,7 +10,7 @@ Laravelを用いて開発したフリマアプリです。<br>
 
 ## 環境構築
 1. リポジトリをクローン
-- git clone ~
+- git clone git@github.com:TakakazuSekiguchi/mock-project_FleaMarket.git
 - docker-compose up -d --build
 
 2. composer install
