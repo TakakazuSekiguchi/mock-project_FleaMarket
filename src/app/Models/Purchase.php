@@ -11,7 +11,6 @@ class Purchase extends Model
 
     protected $fillable = [
         'item_id',
-        'seller_id',
         'buyer_id',
         'payment_method',
         'postal_code',
@@ -25,5 +24,9 @@ class Purchase extends Model
 
     public function item(){
         return $this->belongsTo(Item::class);
+    }
+
+    public function buyer(){
+        return $this->belongsTo(User::class, 'buyer_id');
     }
 }

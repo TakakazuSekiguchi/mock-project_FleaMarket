@@ -150,7 +150,6 @@ class PurchaseController extends Controller
             Purchase::create([
                 'item_id' => $item->id,
                 'buyer_id' => $buyerId,
-                'seller_id' => $item->user_id,
                 'payment_method' => $intent->metadata->payment_method,
                 'postal_code' => $intent->metadata->postal_code,
                 'address' => $intent->metadata->address,
@@ -158,7 +157,6 @@ class PurchaseController extends Controller
             ]);
 
             $item->update([
-                'buyer_id' => $buyerId,
                 'status' => 1,
             ]);
         });

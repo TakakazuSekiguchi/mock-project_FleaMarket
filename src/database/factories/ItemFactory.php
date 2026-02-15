@@ -17,9 +17,6 @@ class ItemFactory extends Factory
             // 出品者
             'user_id' => User::factory(),
 
-            // 購入者（未購入状態）
-            'buyer_id' => null,
-
             // 商品状態
             'condition' => $this->faker->numberBetween(1, 4),
 
@@ -48,7 +45,7 @@ class ItemFactory extends Factory
         return $this->state(function () {
             return [
                 'status' => 1,
-                'buyer_id' => User::factory(),
+                // 'buyer_id' => User::factory(),
             ];
         });
     }

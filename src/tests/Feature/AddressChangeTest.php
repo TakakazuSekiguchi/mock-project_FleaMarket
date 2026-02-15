@@ -98,29 +98,6 @@ class AddressChangeTest extends TestCase
         $this->assertDatabaseHas('items', [
             'id' => $item->id,
             'status' => 1,
-            'buyer_id' => $buyer->id,
         ]);
-
-        // $address = Address::factory()->create([
-        //     'user_id'     => $buyer->id,
-        //     'postal_code' => '123-4567',
-        //     'address'     => '東京都渋谷区1-2-3',
-        //     'building'    => 'テストビル101',
-        // ]);
-
-        // // Act
-        // $this->actingAs($buyer)->post(
-        //     route('purchase.checkout', $item),
-        //     ['payment_method' => 1]
-        // );
-
-        // // Assert
-        // $this->assertDatabaseHas('purchases', [
-        //     'buyer_id'    => $buyer->id,
-        //     'item_id'     => $item->id,
-        //     'postal_code' => '123-4567',
-        //     'address'     => '東京都渋谷区1-2-3',
-        //     'building'    => 'テストビル101',
-        // ]);
     }
 }

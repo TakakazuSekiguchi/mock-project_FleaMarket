@@ -15,7 +15,6 @@ class PurchaseFactory extends Factory
     {
         return [
             'item_id' => Item::factory(),
-            'seller_id' => User::factory(),
             'buyer_id' => User::factory(),
             'payment_method' => 1,
             'postal_code' => '123-4567',

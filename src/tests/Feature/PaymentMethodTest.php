@@ -18,12 +18,11 @@ class PaymentMethodTest extends TestCase
     use RefreshDatabase;
 
     //Mockeryを使用している場合は必ず記述する
-    //PurchaseController側でStripeServiceを使用することになったので、この記述は不要
-    // protected function tearDown(): void
-    // {
-    //     Mockery::close();
-    //     parent::tearDown();
-    // }
+    protected function tearDown(): void
+    {
+        Mockery::close();
+        parent::tearDown();
+    }
 
     public function test_カード払いの場合は「card」がStripeに渡される()
     {

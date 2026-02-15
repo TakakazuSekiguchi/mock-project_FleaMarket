@@ -21,7 +21,6 @@ class ItemsTableSeeder extends Seeder
 
         $params = [
             'user_id' => $user1->id,
-            'buyer_id' => null,
             'condition' => 1,
             'name' => '腕時計',
             'price' => 15000,
@@ -34,7 +33,6 @@ class ItemsTableSeeder extends Seeder
 
         $params = [
             'user_id' => $user1->id,
-            'buyer_id' => null,
             'condition' => 1,
             'name' => 'HDD',
             'price' => 5000,
@@ -47,7 +45,6 @@ class ItemsTableSeeder extends Seeder
 
         $params = [
             'user_id' => $user1->id,
-            'buyer_id' => null,
             'condition' => 1,
             'name' => '玉ねぎ3束',
             'price' => 300,
@@ -60,7 +57,6 @@ class ItemsTableSeeder extends Seeder
 
         $params = [
             'user_id' => $user1->id,
-            'buyer_id' => null,
             'condition' => 4,
             'name' => '革靴',
             'price' => 4000,
@@ -73,7 +69,6 @@ class ItemsTableSeeder extends Seeder
 
         $params = [
             'user_id' => $user1->id,
-            'buyer_id' => null,
             'condition' => 1,
             'name' => 'ノートPC',
             'price' => 45000,
@@ -86,7 +81,6 @@ class ItemsTableSeeder extends Seeder
 
         $params = [
             'user_id' => $user2->id,
-            'buyer_id' => null,
             'condition' => 2,
             'name' => 'マイク',
             'price' => 8000,
@@ -99,7 +93,6 @@ class ItemsTableSeeder extends Seeder
 
         $params = [
             'user_id' => $user2->id,
-            'buyer_id' => null,
             'condition' => 2,
             'name' => 'ショルダーバッグ',
             'price' => 3500,
@@ -112,7 +105,6 @@ class ItemsTableSeeder extends Seeder
 
         $params = [
             'user_id' => $user2->id,
-            'buyer_id' => null,
             'condition' => 4,
             'name' => 'タンブラー',
             'price' => 500,
@@ -125,7 +117,6 @@ class ItemsTableSeeder extends Seeder
 
         $params = [
             'user_id' => $user2->id,
-            'buyer_id' => null,
             'condition' => 1,
             'name' => 'コーヒーミル',
             'price' => 4000,
@@ -138,7 +129,6 @@ class ItemsTableSeeder extends Seeder
 
         $params = [
             'user_id' => $user2->id,
-            'buyer_id' => null,
             'condition' => 4,
             'name' => 'メイクセット',
             'price' => 2500,

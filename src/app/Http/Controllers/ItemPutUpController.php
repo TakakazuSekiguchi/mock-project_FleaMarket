@@ -15,12 +15,7 @@ class ItemPutUpController extends Controller
     }
 
     public function store(ExhibitionRequest $request){
-        //【本番用】画像のpathをstorage/itemsで管理
         $path = $request->file('image')->store('items', 'public');
-
-        //【seederファイル用】画像オリジナルファイル名をstorage/itemsに取り込む際に使用
-        // $path = $request->file('image')->getClientOriginalName();
-        // request()->file('image')->move('storage/items', $path);
 
         $item = Item::create([
             'user_id' => auth()->id(),

@@ -29,7 +29,6 @@ class ItemPurchaseTest extends TestCase
 
         $item = Item::factory()->create([
             'user_id' => $seller->id,
-            'buyer_id' => null,
             'status' => 0,
         ]);
 
@@ -63,7 +62,6 @@ class ItemPurchaseTest extends TestCase
         // items更新確認
         $this->assertDatabaseHas('items', [
             'id' => $item->id,
-            'buyer_id' => $buyer->id,
             'status' => 1,
         ]);
 
@@ -71,7 +69,6 @@ class ItemPurchaseTest extends TestCase
         $this->assertDatabaseHas('purchases', [
             'item_id' => $item->id,
             'buyer_id' => $buyer->id,
-            'seller_id' => $seller->id,
             'payment_method' => 1,
             'postal_code' => '123-4567',
             'address'     => '東京都渋谷区1-2-3',
@@ -88,7 +85,6 @@ class ItemPurchaseTest extends TestCase
 
         $soldItem = Item::factory()->create([
             'user_id'  => $seller->id,
-            'buyer_id'=> $buyer->id,
             'status'  => 1, // 購入済み
             'name'    => 'テスト商品',
         ]);
@@ -114,7 +110,6 @@ class ItemPurchaseTest extends TestCase
 
         $item = Item::factory()->create([
             'user_id'  => $seller->id,
-            'buyer_id' => $buyer->id,
             'status'   => 1,
             'name'     => 'テスト商品',
         ]);
@@ -126,7 +121,6 @@ class ItemPurchaseTest extends TestCase
             ->create([
                 'item_id'   => $item->id,
                 'buyer_id'  => $buyer->id,
-                'seller_id' => $seller->id,
             ]);
 
         // Act

@@ -53,8 +53,11 @@ class UserController extends Controller
         $sellingItems = Item::where('user_id', $user->id)->get();
 
         // 購入商品（購入者が自分 & 購入済み）
-        $purchasedItems = Item::where('buyer_id', $user->id)
-            ->where('status', 1)
+        // N+1問題防止のため、sellerリレーションをwithで事前読み込み
+        $purchasedItems = Item::with('seller')
+            ->whereHas('purchase', function ($query) {
+                $query->where('buyer_id', auth()->id());
+            })
             ->get();
 
         // デフォルトタブ

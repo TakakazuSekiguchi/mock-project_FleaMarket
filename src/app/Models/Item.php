@@ -11,7 +11,6 @@ class Item extends Model
     
     protected $fillable = [
         'user_id',
-        'buyer_id',
         'condition',
         'name',
         'price',
@@ -45,5 +44,13 @@ class Item extends Model
         return $this->likes()
             ->where('user_id', $user->id)
             ->exists();
+    }
+
+    public function seller(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function purchase(){
+        return $this->hasOne(Purchase::class);
     }
 }

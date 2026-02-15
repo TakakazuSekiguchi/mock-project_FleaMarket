@@ -31,11 +31,11 @@ class MyPageTest extends TestCase
         // 購入した商品
         $purchasedItem = Item::factory()->create([
             'user_id' => $seller->id,
-            'buyer_id' => $user->id,
             'name' => '購入商品',
             'status' => 1,
         ]);
 
+        // 購入レコードを作成
         Purchase::factory()->create([
             'buyer_id' => $user->id,
             'item_id'  => $purchasedItem->id,
