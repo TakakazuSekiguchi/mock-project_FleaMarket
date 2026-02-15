@@ -62,6 +62,18 @@ Laravel の標準的な構成に従い、画像は storage/app/public に保存�
 - プロフィール画面_購入した商品一覧：http://localhost/mypage?page=buy
 - プロフィール画面_出品した商品一覧：http://localhost/mypage?page=sell
 
+## ログイン情報（動作確認用アカウント）
+
+### 管理者ユーザー
+- メールアドレス：user1@example.com
+- パスワード：aaaa1111
+
+### 一般ユーザー
+- メールアドレス：user2@example.com
+- パスワード：bbbb2222
+
+※ 上記アカウントは `php artisan db:seed` 実行時に作成されます。<br>
+
 ## 使用技術（実行環境）
 - PHP 8.4.12
 - Laravel 8.83.29
@@ -71,6 +83,10 @@ Laravel の標準的な構成に従い、画像は storage/app/public に保存�
 - Mailtrap
 - Stripe API
 - PHPUnit
+
+## ER図
+
+![ER図](./index.drawio.png)
 
 ## テーブル設計方針
 - 商品と購入履歴を分離するため、purchasesテーブルを作成
