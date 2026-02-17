@@ -17,16 +17,18 @@ Laravelを用いて開発したフリマアプリです。<br>
 - docker-compose exec php composer install
 
 3. .envを作成
+- cd src
 - cp .env.example .env
 
-Stripe のテストキーを設定<br>
-.env ファイルを開き、以下を追記してください。<br>
+docker-compose.ymlのmysqlの箇所を参考に、設定値を変更してください。<br>
 
-STRIPE_KEY=pk_test_xxxxxxxxxxxxxx<br>
-STRIPE_SECRET=sk_test_xxxxxxxxxxxxxx<br>
-STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxxxxxxx<br>
+DB_HOST=mysql<br>
+DB_DATABASE=laravel_db<br>
+DB_USERNAME=laravel_user<br>
+DB_PASSWORD=laravel_pass<br>
 
-※ Stripe のテストキーは Stripe ダッシュボードから取得してください。<br>
+※「メール認証機能の設定」、「Stripeテストキーの設定」については後述いたしますので、<br>
+内容を確認し設定値を変更してください。<br>
 
 4. アプリキー生成
 - docker-compose exec php php artisan key:generate
@@ -41,11 +43,45 @@ Laravel の標準的な構成に従い、画像は storage/app/public に保存�
 
 - docker-compose exec php php artisan storage:link
 
-### Stripe テストキーの取得方法
+### メール認証機能
+LaravelのEmail Verification機能を利用し、会員登録時にメール認証を必須としています。<br>
+未認証ユーザーはログイン後も一部機能にアクセスできない仕様としています。<br>
+
+開発環境ではMailtrapを使用し、送信メールの動作確認を行っています。<br>
+.envファイルについて、My SandboxのUsername、Passwordを確認し、ご自身の設定値に変更してください。<br>
+※Credentials の該当箇所を確認、または、Code Samples でプルダウン選択（PHP: Laravel7.x and 8.x）を行うとスムーズです。<br>
+
+- Mail設定例
+MAIL_MAILER=smtp<br>
+MAIL_HOST=sandbox.smtp.mailtrap.io<br>
+MAIL_PORT=2525<br>
+MAIL_USERNAME=your_username<br>
+MAIL_PASSWORD=your_password<br>
+MAIL_ENCRYPTION=tls<br>
+MAIL_FROM_ADDRESS=noreply@example.com<br>
+MAIL_FROM_NAME="${APP_NAME}"<br>
+
+### Stripe のテストキーを設定
+.env ファイルを開き、以下を追記してください。<br>
+
+STRIPE_KEY=pk_test_xxxxxxxxxxxxxx<br>
+STRIPE_SECRET=sk_test_xxxxxxxxxxxxxx<br>
+STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxxxxxxx<br>
+
+※ Stripe のテストキーは Stripe ダッシュボードから取得してください。<br>
+
+- Stripe テストキーの取得方法
 1. Stripe にログイン
-2. ダッシュボード右上の「開発者」→「APIキー」
+2. ダッシュボードの「開発者」→「APIキー」
 3. 公開可能キー（pk_test_）とシークレットキー（sk_test_）をコピー
-4. Webhook シークレットは Stripe CLI 実行後に表示される
+
+- Webhook Secretの取得方法
+1. powershellを開いて以下コマンドを実行
+stripe listen --forward-to http://localhost/api/webhook<br>
+
+2. 表示されたWEBHOOKシークレットキーを確認、`.env`に設定
+表示された「Your webhook signing secret is whsec_xxxxxx」を基に<br>
+.env の STRIPE_WEBHOOK_SECRET に設定してください。<br>
 
 ## 画面定義
 - phpMyAdmin：http://localhost:8080/
@@ -62,18 +98,6 @@ Laravel の標準的な構成に従い、画像は storage/app/public に保存�
 - プロフィール画面_購入した商品一覧：http://localhost/mypage?page=buy
 - プロフィール画面_出品した商品一覧：http://localhost/mypage?page=sell
 
-## ログイン情報（動作確認用アカウント）
-
-### 管理者ユーザー
-- メールアドレス：user1@example.com
-- パスワード：aaaa1111
-
-### 一般ユーザー
-- メールアドレス：user2@example.com
-- パスワード：bbbb2222
-
-※ 上記アカウントは `php artisan db:seed` 実行時に作成されます。<br>
-
 ## 使用技術（実行環境）
 - PHP 8.4.12
 - Laravel 8.83.29
@@ -85,7 +109,6 @@ Laravel の標準的な構成に従い、画像は storage/app/public に保存�
 - PHPUnit
 
 ## ER図
-
 ![ER図](./index.drawio.png)
 
 ## テーブル設計方針
@@ -93,22 +116,6 @@ Laravel の標準的な構成に従い、画像は storage/app/public に保存�
 - N+1問題を回避するため eager loading を使用
 - 商品とカテゴリは多対多のため中間テーブル（category_item）を作成
 - 重複購入防止のため商品ステータスを管理
-
-## メール認証機能
-LaravelのEmail Verification機能を利用し、会員登録時にメール認証を必須としています。<br>
-未認証ユーザーはログイン後も一部機能にアクセスできない仕様としています。<br>
-
-開発環境ではMailtrapを使用し、送信メールの動作確認を行っています。<br>
-.envファイルについて、My SandboxのUsername、Passwordを確認し、<br>
-自身の設定値に変更してください。<br>
-
-### Mail設定
-MAIL_MAILER=smtp<br>
-MAIL_HOST=sandbox.smtp.mailtrap.io<br>
-MAIL_PORT=2525<br>
-MAIL_USERNAME=your_username<br>
-MAIL_PASSWORD=your_password<br>
-MAIL_ENCRYPTION=tls<br>
 
 ## 決済機能（Stripe）
 Stripe Checkoutを利用して決済機能を実装しています。<br>
@@ -137,7 +144,6 @@ powershellを開いて以下コマンドを実行してください。<br>
 
 - stripe listen --forward-to http://localhost/api/webhook
 
-
 ## セキュリティ対策
 - メール認証必須
 - CSRF対策（Laravel標準機能）
@@ -145,6 +151,38 @@ powershellを開いて以下コマンドを実行してください。<br>
 - 出品者による自己購入防止
 - 二重購入防止チェック
 - Webhook署名検証による不正リクエスト防止
+
+## ログイン情報（動作確認用アカウント）
+
+### ユーザー1（住所登録のあるユーザー）
+- メールアドレス：user1@example.com
+- パスワード：aaaa1111
+
+### ユーザー2（住所登録のないユーザー）
+- メールアドレス：user2@example.com
+- パスワード：bbbb2222
+
+※ 上記アカウントは `php artisan db:seed` 実行時に作成されます。<br>
+※ ユーザー2は、商品購入画面における住所未登録時のバリデーション確認用アカウントです。<br>
+※ 両ユーザーともメール認証済みの状態で作成されています。<br>
+
+## バリデーション実装について
+本アプリでは、入力値の検証を以下の方針で実装しています。<br>
+
+### 一般フォーム（商品出品・プロフィール更新 等）
+商品出品やプロフィール更新などの業務フォームについては、<br>
+FormRequest クラスを使用してバリデーションを実装しています。<br>
+
+各フォームごとに専用のRequestクラスを作成し、<br>
+バリデーションルールを分離することでコントローラーの責務を軽減し、保守性を高めています。<br>
+
+### 認証機能（会員登録・ログイン）
+認証機能には Laravel Fortify を使用しています。<br>
+
+Fortifyは認証処理を内部で管理する設計のため、<br>
+会員登録およびログイン時のバリデーションは、FortifyのActionクラス（例：CreateNewUser.php）内で実装しています。<br>
+
+そのため、認証処理に関してはFormRequestは使用していません。<br>
 
 ## テスト
 Featureテスト、Unitテストを中心に実装しています。<br>
