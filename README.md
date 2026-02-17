@@ -51,7 +51,7 @@ LaravelのEmail Verification機能を利用し、会員登録時にメール認�
 .envファイルについて、My SandboxのUsername、Passwordを確認し、ご自身の設定値に変更してください。<br>
 ※Credentials の該当箇所を確認、または、Code Samples でプルダウン選択（PHP: Laravel7.x and 8.x）を行うとスムーズです。<br>
 
-- Mail設定例
+- Mail設定例<br>
 MAIL_MAILER=smtp<br>
 MAIL_HOST=sandbox.smtp.mailtrap.io<br>
 MAIL_PORT=2525<br>
@@ -76,10 +76,10 @@ STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxxxxxxx<br>
 3. 公開可能キー（pk_test_）とシークレットキー（sk_test_）をコピー
 
 - Webhook Secretの取得方法
-1. powershellを開いて以下コマンドを実行
+1. powershellを開いて以下コマンドを実行<br>
 stripe listen --forward-to http://localhost/api/webhook<br>
 
-2. 表示されたWEBHOOKシークレットキーを確認、`.env`に設定
+2. 表示されたWEBHOOKシークレットキーを確認、`.env`に設定<br>
 表示された「Your webhook signing secret is whsec_xxxxxx」を基に<br>
 .env の STRIPE_WEBHOOK_SECRET に設定してください。<br>
 
