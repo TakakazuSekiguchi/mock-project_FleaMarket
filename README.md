@@ -9,14 +9,17 @@ Laravelを用いて開発したフリマアプリです。<br>
 データベース設計・決済処理・テスト実装まで一貫して開発しました。
 
 ## 環境構築
+※ Docker Desktop を起動した状態で以下の手順を実行してください。<br>
+
 1. リポジトリをクローン
 - git clone git@github.com:TakakazuSekiguchi/mock-project_FleaMarket.git
+- cd mock-project_FleaMarket
 - docker-compose up -d --build
 
 2. composer install
 - docker-compose exec php composer install
 
-3. .envを作成
+3. `.env`を作成
 - cd src
 - cp .env.example .env
 
@@ -38,7 +41,7 @@ DB_PASSWORD=laravel_pass<br>
 - docker-compose exec php php artisan db:seed
 
 6. 画像表示について
-Laravel の標準的な構成に従い、画像は storage/app/public に保存しています。<br>
+Laravel の標準的な構成に従い、画像は`storage/app/public`に保存しています。<br>
 そのため、clone 後に以下のコマンドを実行してください。<br>
 
 - docker-compose exec php php artisan storage:link
@@ -81,7 +84,7 @@ stripe listen --forward-to http://localhost/api/webhook<br>
 
 2. 表示されたWEBHOOKシークレットキーを確認、`.env`に設定<br>
 表示された「Your webhook signing secret is whsec_xxxxxx」を基に<br>
-.env の STRIPE_WEBHOOK_SECRET に設定してください。<br>
+`.env`の STRIPE_WEBHOOK_SECRET に設定してください。<br>
 
 ## 画面定義
 - phpMyAdmin：http://localhost:8080/
@@ -180,7 +183,7 @@ FormRequest クラスを使用してバリデーションを実装していま�
 認証機能には Laravel Fortify を使用しています。<br>
 
 Fortifyは認証処理を内部で管理する設計のため、<br>
-会員登録およびログイン時のバリデーションは、FortifyのActionクラス（例：CreateNewUser.php）内で実装しています。<br>
+会員登録およびログイン時のバリデーションは、FortifyのActionクラス内で実装しています。<br>
 
 そのため、認証処理に関してはFormRequestは使用していません。<br>
 
