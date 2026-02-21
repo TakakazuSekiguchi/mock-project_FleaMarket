@@ -12,19 +12,18 @@ Laravelを用いて開発したフリマアプリです。<br>
 ※ Docker Desktop を起動した状態で以下の手順を実行してください。<br>
 
 1. リポジトリをクローン
-- git clone git@github.com:TakakazuSekiguchi/mock-project_FleaMarket.git
-- cd mock-project_FleaMarket
-- docker-compose up -d --build
+git clone git@github.com:TakakazuSekiguchi/mock-project_FleaMarket.git<br>
+cd mock-project_FleaMarket<br>
+docker-compose up -d --build<br>
 
 2. composer install
-- docker-compose exec php composer install
+docker-compose exec php composer install<br>
 
 3. `.env`を作成
-- cd src
-- cp .env.example .env
+cd src<br>
+cp .env.example .env<br>
 
-docker-compose.ymlのmysqlの箇所を参考に、設定値を変更してください。<br>
-
+- docker-compose.ymlのmysqlの箇所を参考に、設定値を変更してください。<br>
 DB_HOST=mysql<br>
 DB_DATABASE=laravel_db<br>
 DB_USERNAME=laravel_user<br>
@@ -34,25 +33,24 @@ DB_PASSWORD=laravel_pass<br>
 内容を確認し設定値を変更してください。<br>
 
 4. アプリキー生成
-- docker-compose exec php php artisan key:generate
+docker-compose exec php php artisan key:generate<br>
 
 5. マイグレーション
-- docker-compose exec php php artisan migrate
-- docker-compose exec php php artisan db:seed
+docker-compose exec php php artisan migrate<br>
+docker-compose exec php php artisan db:seed<br>
 
 6. 画像表示について
 Laravel の標準的な構成に従い、画像は`storage/app/public`に保存しています。<br>
 そのため、clone 後に以下のコマンドを実行してください。<br>
-
-- docker-compose exec php php artisan storage:link
+docker-compose exec php php artisan storage:link<br>
 
 ### メール認証機能
 LaravelのEmail Verification機能を利用し、会員登録時にメール認証を必須としています。<br>
 未認証ユーザーはログイン後も一部機能にアクセスできない仕様としています。<br>
 
-開発環境ではMailtrapを使用し、送信メールの動作確認を行っています。<br>
-.envファイルについて、My SandboxのUsername、Passwordを確認し、ご自身の設定値に変更してください。<br>
-※Credentials の該当箇所を確認、または、Code Samples でプルダウン選択（PHP: Laravel7.x and 8.x）を行うとスムーズです。<br>
+開発環境では Mailtrap を使用し、送信メールの動作確認を行っています。<br>
+`.env`ファイルについて、MailtrapのMy Sandbox内にあるUsername、Passwordを確認し、ご自身の設定値に変更してください。<br>
+※Credentials の該当箇所を確認してください。<br>
 
 - Mail設定例<br>
 MAIL_MAILER=smtp<br>
@@ -65,13 +63,12 @@ MAIL_FROM_ADDRESS=noreply@example.com<br>
 MAIL_FROM_NAME="${APP_NAME}"<br>
 
 ### Stripe のテストキーを設定
-.env ファイルを開き、以下を追記してください。<br>
+`.env`ファイルを開き、以下を追記してください。<br>
+※ Stripe のテストキーは Stripe ダッシュボードから取得してください。<br>
 
 STRIPE_KEY=pk_test_xxxxxxxxxxxxxx<br>
 STRIPE_SECRET=sk_test_xxxxxxxxxxxxxx<br>
 STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxxxxxxx<br>
-
-※ Stripe のテストキーは Stripe ダッシュボードから取得してください。<br>
 
 - Stripe テストキーの取得方法
 1. Stripe にログイン
@@ -142,10 +139,19 @@ Stripe Checkoutを利用して決済機能を実装しています。<br>
 - 購入レコード作成と商品ステータス更新は、トランザクションで実行しデータ整合性を保証しています。
 
 ### ブラウザ上で決済操作する際の注意点
-powershellを開いて以下コマンドを実行してください。<br>
+- powershellを開いて以下コマンドを実行してください。<br>
 ※こちらを行わないと、購入情報がlaravelのDBに反映されません。<br>
+stripe listen --forward-to http://localhost/api/webhook<br>
 
-- stripe listen --forward-to http://localhost/api/webhook
+- 決済時の入力例（コンビニ支払）
+メールアドレス：任意のメールアドレス<br>
+確認番号：22222222220<br>
+※即座に成功し、その後`payment_intent.succeeded Webhook`を受信するコンビニ決済をシミュレーションします。<br>
+
+- 決済時の入力例（カード決済）
+カード番号：4242 4242 4242 4242<br>
+セキュリティコード：任意の3桁の数字<br>
+日付：任意の将来の日付<br>
 
 ## セキュリティ対策
 - メール認証必須
@@ -208,9 +214,8 @@ Featureテスト、Unitテストを中心に実装しています。<br>
 
 ### テスト環境構築
 1. `.env` をコピーして `.env.testing` を作成<br>
-docker-compose exec php bash<br>
+cd src<br>
 cp .env .env.testing<br>
-exit<br>
 
 2. `.env.testing` のAPP_ENVとAPP_KEY=を以下のように変更<br>
 APP_ENV=test<br>
@@ -220,6 +225,7 @@ APP_KEY=<br>
 その後、後述のコマンド（key:generate）でテスト用キーを生成します。<br>
 
 3. `.env.testing` のDB設定を以下のように変更<br>
+DB_CONNECTION=mysql_test<br>
 DB_DATABASE=demo_test<br>
 DB_USERNAME=root<br>
 DB_PASSWORD=root<br>
@@ -228,11 +234,11 @@ DB_PASSWORD=root<br>
 必ず『DB_DATABASE=demo_test』に書き換えるようお願いいたします。<br>
 
 ### テスト用データベースを作成
-- docker-compose exec php php artisan key:generate --env=testing
-- docker-compose exec php php artisan migrate --env=testing
+docker-compose exec php php artisan key:generate --env=testing<br>
+docker-compose exec php php artisan migrate:fresh --env=testing<br>
 
 ### テスト実行
-- docker-compose exec php php artisan test
+docker-compose exec php php artisan test<br>
 
 ※ テストでは RefreshDatabase を使用し、各テスト実行ごとにDBをリセットしています。<br>
 
