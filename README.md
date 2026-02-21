@@ -213,11 +213,13 @@ Featureテスト、Unitテストを中心に実装しています。<br>
 - メール認証機能
 
 ### テスト環境構築
-1. データベースを作成
+1. データベースを作成<br>
+- rootユーザーで MySQL にログイン<br>
 docker compose exec mysql bash<br>
 mysql -u root -p<br>
 ※パスワードは、docker-compose.ymlファイルのMYSQL_ROOT_PASSWORD:に設定されている値を入力してください。<br>
 
+- demo_test というデータベースを作成<br>
 CREATE DATABASE demo_test;<br>
 SHOW DATABASES;<br>
 ※SHOW DATABASES;入力後、demo_testが作成されていれば成功です。<br>
