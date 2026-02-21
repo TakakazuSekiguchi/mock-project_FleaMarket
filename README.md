@@ -11,15 +11,15 @@ Laravelを用いて開発したフリマアプリです。<br>
 ## 環境構築
 ※ Docker Desktop を起動した状態で以下の手順を実行してください。<br>
 
-1. リポジトリをクローン
+1. リポジトリをクローン<br>
 git clone git@github.com:TakakazuSekiguchi/mock-project_FleaMarket.git<br>
 cd mock-project_FleaMarket<br>
 docker-compose up -d --build<br>
 
-2. composer install
+2. composer install<br>
 docker-compose exec php composer install<br>
 
-3. `.env`を作成
+3. `.env`を作成<br>
 cd src<br>
 cp .env.example .env<br>
 
@@ -32,14 +32,14 @@ DB_PASSWORD=laravel_pass<br>
 ※「メール認証機能の設定」、「Stripeテストキーの設定」については後述いたしますので、<br>
 内容を確認し設定値を変更してください。<br>
 
-4. アプリキー生成
+4. アプリキー生成<br>
 docker-compose exec php php artisan key:generate<br>
 
-5. マイグレーション
+5. マイグレーション<br>
 docker-compose exec php php artisan migrate<br>
 docker-compose exec php php artisan db:seed<br>
 
-6. 画像表示について
+6. 画像表示について<br>
 Laravel の標準的な構成に従い、画像は`storage/app/public`に保存しています。<br>
 そのため、clone 後に以下のコマンドを実行してください。<br>
 docker-compose exec php php artisan storage:link<br>
@@ -143,12 +143,12 @@ Stripe Checkoutを利用して決済機能を実装しています。<br>
 ※こちらを行わないと、購入情報がlaravelのDBに反映されません。<br>
 stripe listen --forward-to http://localhost/api/webhook<br>
 
-- 決済時の入力例（コンビニ支払）
+- 決済時の入力例（コンビニ支払）<br>
 メールアドレス：任意のメールアドレス<br>
 確認番号：22222222220<br>
 ※即座に成功し、その後`payment_intent.succeeded Webhook`を受信するコンビニ決済をシミュレーションします。<br>
 
-- 決済時の入力例（カード決済）
+- 決済時の入力例（カード決済）<br>
 カード番号：4242 4242 4242 4242<br>
 セキュリティコード：任意の3桁の数字<br>
 日付：任意の将来の日付<br>
