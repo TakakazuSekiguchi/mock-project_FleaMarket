@@ -213,18 +213,27 @@ Featureテスト、Unitテストを中心に実装しています。<br>
 - メール認証機能
 
 ### テスト環境構築
-1. `.env` をコピーして `.env.testing` を作成<br>
+1. データベースを作成
+docker compose exec mysql bash<br>
+mysql -u root -p<br>
+※パスワードは、docker-compose.ymlファイルのMYSQL_ROOT_PASSWORD:に設定されている値を入力してください。<br>
+
+CREATE DATABASE demo_test;<br>
+SHOW DATABASES;<br>
+※SHOW DATABASES;入力後、demo_testが作成されていれば成功です。<br>
+
+2. `.env` をコピーして `.env.testing` を作成<br>
 cd src<br>
 cp .env .env.testing<br>
 
-2. `.env.testing` のAPP_ENVとAPP_KEY=を以下のように変更<br>
+3. `.env.testing` のAPP_ENVとAPP_KEY=を以下のように変更<br>
 APP_ENV=test<br>
 APP_KEY=<br>
 
 ※ APP_KEYはテスト用に再生成するため、一度空にしてください。<br>
 その後、後述のコマンド（key:generate）でテスト用キーを生成します。<br>
 
-3. `.env.testing` のDB設定を以下のように変更<br>
+4. `.env.testing` のDB設定を以下のように変更<br>
 DB_CONNECTION=mysql_test<br>
 DB_DATABASE=demo_test<br>
 DB_USERNAME=root<br>
